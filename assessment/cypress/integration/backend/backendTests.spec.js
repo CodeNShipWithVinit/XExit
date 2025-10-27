@@ -1,5 +1,5 @@
 describe("Backend API Tests for Employee and Admin Role", () => {
-  const apiUrl = "http://localhost:8080/api";
+  const apiUrl = "http://localhost:3001/api";
   let employeeResignationId = null; // Store the resignation ID for approval
   let employeeUsername = `emp_${Date.now()}`; // Generate a unique username
   const employeePassword = "emp4"; // Use the same password for registration and login
@@ -38,7 +38,7 @@ describe("Backend API Tests for Employee and Admin Role", () => {
         Authorization: `${token}`,
       },
       body: {
-        lwd: "2024-12-26",
+        lwd: "2025-12-26",
       },
     }).then((response) => {
       expect(response.status).to.eq(200);
@@ -83,7 +83,7 @@ describe("Backend API Tests for Employee and Admin Role", () => {
       body: {
         resignationId: employeeResignationId,
         approved: true,
-        lwd: "26 Dec 2024",
+        lwd: "26 Dec 2025",
       },
     }).then((response) => {
       expect(response.status).to.eq(200);
