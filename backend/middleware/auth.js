@@ -3,11 +3,15 @@ const { getUserById } = require('../database');
 
 const authenticateToken = (req, res, next) => {
   const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1]; // Bearer TOKEN
 
-  if (!token) {
+  if (!authHeader) {
     return res.status(401).json({ error: 'Access token required' });
   }
+
+  // 🔥 FIX: support both token formats
+  const token = authHeader.startsWith('Bearer ')
+    ? authHeader.split(' ')[1]
+    : authHeader;
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
@@ -25,6 +29,7 @@ const authenticateToken = (req, res, next) => {
       name: user.name,
       country: user.country
     };
+
     next();
   } catch (error) {
     return res.status(403).json({ error: 'Invalid or expired token' });

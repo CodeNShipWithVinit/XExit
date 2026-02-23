@@ -56,14 +56,14 @@ const addUser = (user) => {
 };
 
 const getResignations = () => db.resignations;
-const getResignationById = (id) => db.resignations.find(r => r.id === id);
+const getResignationById = (id) => db.resignations.find(r => r._id === id); //
 const getResignationsByEmployeeId = (employeeId) => db.resignations.filter(r => r.employeeId === employeeId);
 const addResignation = (resignation) => {
   db.resignations.push(resignation);
   return resignation;
 };
 const updateResignation = (id, updates) => {
-  const index = db.resignations.findIndex(r => r.id === id);
+  const index = db.resignations.findIndex(r => r._id === id); //
   if (index !== -1) {
     db.resignations[index] = { ...db.resignations[index], ...updates };
     return db.resignations[index];

@@ -7,6 +7,8 @@ const { initializeDatabase } = require('./database');
 const authRoutes = require('./routes/auth');
 const resignationRoutes = require('./routes/resignations');
 const exitInterviewRoutes = require('./routes/exitInterviews');
+const userRoutes = require('./routes/user');
+const adminRoutes = require('./routes/admin');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -24,6 +26,8 @@ app.use((req, res, next) => {
 
 // Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/user', userRoutes);
+app.use('/api/admin', adminRoutes);
 app.use('/api/resignations', resignationRoutes);
 app.use('/api/exit-interviews', exitInterviewRoutes);
 
